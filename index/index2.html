@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <h1>TODOアプリ</h1>
+
+      <ul>
+        タスク名：<input type="text" v-model="text">
+        推定時間(分)：<input v-model="time">
+        <button v-on:click="addContent()">追加</button>
+
+        <li v-for="content in contents" :key="content">
+          {{ content.text}} {{ content.time }}
+        </li>
+      </ul>
+
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          contents: [
+            { text: '予習', time: 30 },
+            { text: '復習', time: 30 },
+          ]
+        },
+        methods: {
+          addContent: function () {
+              this.contents.push({
+            
+              text: "",
+              time: ""
+                
+            })
+          }
+        }
+      })
+    </script>
+    <style>
+      .sample {
+        display: flex;
+        justify-content: space-around;
+      }
+    </style>
+  </body>
+
+  </html>

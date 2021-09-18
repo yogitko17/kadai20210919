@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+
+<body>
+  <div id="todo">
+    <h1>TODOアプリ</h1>
+    タスク名：<input type="text" v-model="input">
+    推定時間(分)：<input type="text" v-model="time">
+    <button v-on:click="addContent">追加</button>
+     <div class="todo-content">
+      <p>タスク</p>
+      <p>推定時間(分)</p>
+     </div>
+
+      <todo-item v-for="todo in todos" 
+      :key="todo.id" 
+      :content="todo.content" 
+      :id="todo.id" v-bind="todo"></todo-item>
+      <li v-for="task in tasks">
+        <todo-content v-on:click="addContent" />
+      </li>
+
+  </div>
+
+  <script>
+    Vue.component('todo-item', {
+      props: ['content', 'id'],
+      template: '<div>{{content}}  {{id}}</div>'
+    })
+
+    const vm = new Vue({
+      el: '#todo',
+      data: {
+        todos: [
+          {
+            content: '予習',
+            id: 30
+          },
+          {
+            content: '復習',
+            id: 30
+          },
+        ],
+        tasks: [
+          {
+            content: '',
+            id: '',
+          },
+        ]
+      },
+      methods: {
+        addContent: function (id) {
+          this.tasks.push({
+            content: "",
+            id: ""
+          })
+        }
+      }
+    });
+
+  </script>
+  <style>
+    #todo li {
+      list-style: none;
+    }
+    .todo-content{
+      display: flex;
+      justify-content: space-around;
+    }
+   
+  </style>
+</body>
+
+</html>
